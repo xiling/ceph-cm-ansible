@@ -74,3 +74,4 @@
   service:
     name: apache2
     state: stopped
+  failed_when: false

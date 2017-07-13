@@ -16,6 +16,7 @@
     owner: root
     group: root
     mode: 0755
+  failed_when: false
 
 - name: Enable kernel logging to console.
   script: scripts/kernel_logging.sh creates=/kernel-logging-setup

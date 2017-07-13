@@ -40,3 +40,4 @@
     name: "{{ntp_service_name}}"
     enabled: yes
     state: started
+  failed_when: false
