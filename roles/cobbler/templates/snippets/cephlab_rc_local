@@ -16,6 +16,14 @@ exec 2> /tmp/rc.local.log
 exec 1>&2
 set -ex
 
+myhostname=$(dig +short -x $ip_address_eth0 @172.21.0.1)
+# Cuts the last character from dig output and sets hostname
+hostname ${myhostname%?}
+echo ${myhostname%?} > /etc/hostname
+# Replaces lines in /etc/hosts
+machinetype=$(echo $hostname | sed 's/[0-9]\+//g' | cut -d '.' -f1)
+sed -i "/$machinetype/c/$ip_address_eth0 $hostname $name" /etc/hosts
+
 # Only run once.
 if [ -e $lockfile ]; then
     exit 0
